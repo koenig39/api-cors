@@ -5,9 +5,13 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-CORS(app)
 api = Api(app)
 
+CORS(app)
+@app.route("/hello")
+def hello_world():
+    return "<p>Hello, World!</p>"
+    
 # cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # @app.after_request
@@ -23,9 +27,6 @@ class TestApi(Resource):
 
 api.add_resource(TestApi, '/cors')
 
-@app.route("/hello")
-def hello_world():
-    return "<p>Hello, World!</p>"
 
 if __name__ == '__main__':
     app.run(
