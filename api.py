@@ -7,19 +7,19 @@ from flask_cors import CORS
 app = Flask(__name__)
 api = Api(app)
 
-CORS(app)
+# CORS(app)
 @app.route("/hello")
 def hello_world():
     return "<p>Hello, World!</p>"
-    
-# cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-# @app.after_request
-# def after_request(response):
-#     response.headers.add('Access-Control-Allow-Origin', '*')
-#     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-#     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-#     return response
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    return response
 
 class TestApi(Resource):
     def get(self):
