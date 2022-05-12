@@ -8,6 +8,8 @@ app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 class TestApi(Resource):
     def get(self):
         return {'API version' : 0.1}
